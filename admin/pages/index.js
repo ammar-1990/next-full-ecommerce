@@ -1,10 +1,15 @@
-import Image from 'next/image'
+import Head from 'next/head'
 import jwt from 'jsonwebtoken'
 
 
 export default function Home({user}) {
   return (
-<div>{JSON.stringify(user)}</div>
+<div className=''>
+  <Head>
+    <title>{`Admin | ${user.username}`}</title>
+  </Head>
+  
+  {user.username}</div>
   )
 }
 
@@ -25,7 +30,6 @@ const user =jwt.verify(req.cookies.accessToken,process.env.JWT_SECRET,(error,tok
 
 
 })
-console.log(user)
 
 if(!user) return {redirect:{destination:'/register',   permanent: false,}}
 

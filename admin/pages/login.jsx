@@ -45,3 +45,8 @@ e.preventDefault()
 }
 
 export default Login
+
+
+
+
+Login.getLayout = (page) => page;

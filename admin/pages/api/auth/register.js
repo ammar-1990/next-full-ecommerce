@@ -5,11 +5,12 @@ import connectDB from "@/middleware/mongodb.js";
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 import { setCookie } from 'cookies-next';
+import { verifyToken } from "@/middleware/verifyToken.js";
 
 
 
 export const handler = async (req, res, next) => {
-
+verifyToken(req,res)
     const { username, email, password } = req.body;
 
   try {
@@ -37,5 +38,7 @@ const hash = bcrypt.hashSync(password,5)
     errorHandler(error, req, res);
   }
 };
+
+
 
 export default connectDB(handler);

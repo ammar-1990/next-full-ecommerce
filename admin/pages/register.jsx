@@ -3,7 +3,7 @@ import Link from "next/link"
 import { useRouter } from "next/router"
 import { newAxios } from '@/lib/axios'
 
-const register = () => {
+const Register = () => {
 
 
     const [email,setEmail] = useState('')
@@ -47,4 +47,10 @@ const router = useRouter()
       )
 }
 
-export default register
+export default Register
+
+
+
+
+
+Register.getLayout = (page) => page;
