@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input{
+  @apply w-full p-3 bg-transparent border-b outline-none focus:ring-2 focus:ring-slate-800 rounded-sm
+}
