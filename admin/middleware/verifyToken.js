@@ -11,6 +11,7 @@ jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
     if(err) return errorHandler(err,req,res)
 
     req.user = user
+    console.log(user)
 
 })
 

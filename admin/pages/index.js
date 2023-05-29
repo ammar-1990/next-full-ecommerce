@@ -9,7 +9,10 @@ export default function Home({user}) {
     <title>{`Admin | ${user.username}`}</title>
   </Head>
   
-  {user.username}</div>
+ <p>Hello, <span className='capitalize font-semibold'>{user.username}!</span></p>
+ 
+ 
+ </div>
   )
 }
 

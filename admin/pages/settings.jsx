@@ -1,9 +1,33 @@
-import React from 'react'
+import jwt from 'jsonwebtoken'
 
-const Settings = () => {
+const Settings = ({user}) => {
   return (
-    <div>Settings</div>
+    <div>{user.username}</div>
   )
 }
 
 export default Settings
+
+
+
+
+export async function getServerSideProps({req,res}){
+
+  const user =jwt.verify(req.cookies.accessToken,process.env.JWT_SECRET,(error,token)=>{
+    if(error) return null
+      
+    
+  
+   return req.user=token
+  
+  
+  })
+  
+  if(!user) return {redirect:{destination:'/register',   permanent: false,}}
+  
+  
+  
+    return {
+      props:{user}
+    }
+  }
