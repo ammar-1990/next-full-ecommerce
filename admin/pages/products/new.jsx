@@ -1,4 +1,5 @@
 import ProductControl from "@/components/ProductControl";
+import Head from "next/head";
 
 
 
@@ -10,6 +11,7 @@ const NewProduct = () => {
     price: "",
     cat: "",
     features: [],
+    images:[],
   };
 
   
@@ -18,7 +20,14 @@ const NewProduct = () => {
 
   
   return (
+    <>
+    <Head>
+      <title>
+New Product
+      </title>
+    </Head>
   <ProductControl initial_state={initial_state} />
+  </>
   );
 };
 

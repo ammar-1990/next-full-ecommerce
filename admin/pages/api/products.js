@@ -25,15 +25,15 @@ const handler = async (req, res) => {
 
   verifyToken(req, res);
   if(req.method === "PUT"){
-console.log('GET')
+
     const id = req.query.id;
-    const { name, desc, price, cat, features } = req.body;
-    if (!name || !desc || !price || !cat)
+    const { name, desc, price, cat, features ,images} = req.body;
+    if (!name || !desc || !price || !cat ||images.length===0)
       return errorHandler(createError(409, "enter all informations"), req, res);
 
       try {
      
-        const product = await Product.findByIdAndUpdate(id,{ name, desc, price, cat, features },{new:true});
+        const product = await Product.findByIdAndUpdate(id,{ name, desc, price, cat, features,images },{new:true});
         if(!product)
         return errorHandler(createError(404, "no such product"), req, res);
       return  res.status(201).json(product);
@@ -46,12 +46,12 @@ console.log('GET')
 if(req.method==="POST")
   {
 console.log('post')
-    const { name, desc, price, cat, features } = req.body;
-  if (!name || !desc || !price || !cat)
+    const { name, desc, price, cat, features,images } = req.body;
+  if (!name || !desc || !price || !cat || images.length ===0)
     return errorHandler(createError(409, "enter all informations"), req, res);
 
   try {
-    const product = await Product.create({ name, desc, price, cat, features });
+    const product = await Product.create({ name, desc, price, cat, features,images });
     res.status(201).json(product);
   } catch (error) {
     errorHandler(error, req, res);

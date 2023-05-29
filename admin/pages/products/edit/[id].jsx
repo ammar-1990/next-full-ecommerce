@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 import { newAxios } from "@/lib/axios";
 import ProductControl from "@/components/ProductControl";
+import Head from "next/head";
 
 const ProductId = ({ theProduct }) => {
   const initial_state = {
@@ -11,6 +12,7 @@ const ProductId = ({ theProduct }) => {
     price: theProduct?.price,
     cat: theProduct?.cat,
     features: theProduct?.features || [],
+    images:theProduct.images
   };
 
   console.log(initial_state);
@@ -19,7 +21,13 @@ const ProductId = ({ theProduct }) => {
 
   if (!theProduct) return <p>no such product</p>;
 
-  return <ProductControl put={true} initial_state={initial_state} id={id}/>;
+  return <>
+  <Head>
+    <title>
+      Edit Product
+    </title>
+  </Head>
+  <ProductControl put={true} initial_state={initial_state} id={id}/></>;
 };
 
 export default ProductId;

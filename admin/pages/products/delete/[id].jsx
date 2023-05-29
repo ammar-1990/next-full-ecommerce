@@ -3,6 +3,7 @@ import  jwt  from 'jsonwebtoken'
 import { newAxios } from '@/lib/axios'
 import Link from 'next/link'
 import usePostFetch from '@/hooks/usePostFetch'
+import Head from 'next/head'
 
 const DeleteProduct = ({user,theProduct}) => {
 const {data,loading,error,deletePost} = usePostFetch()
@@ -14,12 +15,18 @@ const {data,loading,error,deletePost} = usePostFetch()
     const handleDelete =async()=>{
 
       await deletePost(`/products?id=${id}`)
- router.push('/products',undefined,{replace:true})
+router.replace('/products',undefined,{replace:true})
 
 
     }
 if(!theProduct) return <p>no such product</p>
   return (
+    <>
+    <Head>
+        <title>
+            Delete Product
+        </title>
+    </Head>
     <div className='h-full flex items-center justify-center'>
 <div>
     <p>
@@ -33,6 +40,7 @@ if(!theProduct) return <p>no such product</p>
     </div>
 </div>
     </div>
+    </>
   )
 }
 
