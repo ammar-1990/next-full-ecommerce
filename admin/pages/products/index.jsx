@@ -16,11 +16,12 @@ const Products = ({ user, products }) => {
           Products
         </title>
       </Head>
+      <div></div>
       <Link className="btn" href={"/products/new"}>
         Add new product
       </Link>
 
-      <div className="mt-8 p-4 max-h-[500px] overflow-y-scroll myScroll">
+      <div className="mt-8 p-4 max-h-[500px] overflow-y-scroll myScroll ">
         <table className="w-full  capitalize border border-black ">
           <thead className="bg-black text-white ">
             <tr>
@@ -36,15 +37,15 @@ const Products = ({ user, products }) => {
             )}
             {theProducts.map((el) => (
               <tr className="even:bg-gray-200 bg-gray-100" key={el._id}>
-                <td className="p-2 border border-gray-300">{el.name}</td>
+                <td className="p-2 border border-gray-300 ">{el.name}</td>
                 <td className="p-2 border border-gray-300 text-center">
                   <Link href={`/products/edit/${el._id}`}>
-                    <button className="px-3 py-1 text-white bg-black inline-flex items-center gap-1">
+                    <button className="px-3 py-1 text-white bg-black inline-flex items-center gap-1 rounded-l-md">
                       <PencilSquareIcon className="h-4 text-white" />
                       Edit
                     </button>
                   </Link>
-                 <Link href={`/products/delete/${el._id}`}><button className="px-3 py-1 text-white bg-red-500 inline-flex items-center gap-1">
+                 <Link href={`/products/delete/${el._id}`}><button className="px-3 py-1 text-white bg-red-500 inline-flex items-center gap-1 rounded-r-md">
                     <TrashIcon className="h-4 text-white" />
                     Delete
                   </button></Link> 

@@ -3,12 +3,16 @@ import usePostFetch from "@/hooks/usePostFetch";
 import { useRouter } from "next/router";
 import mongoose from "mongoose";
 import axios from "axios";
+import Link from "next/link";
+import BounceLoader from "react-spinners/BounceLoader";
 
 const ProductControl = ({ initial_state, put, id }) => {
   const { loading, error, addPost, putPost } = usePostFetch();
   const [feature, setFeature] = useState("");
   const [loadingImages, setLoadingImages] = useState(false);
   const [errorImages, setErrorImages] = useState("");
+  const [loaders, setLoaders] = useState([]);
+  const [imageUrl, setImageUrl] = useState("");
 
   const upload = async (file) => {
     if (!file) {
@@ -26,19 +30,16 @@ const ProductControl = ({ initial_state, put, id }) => {
         data
       );
       const url = res.data;
+
       return url;
     } catch (error) {
       setErrorImages(error);
+      setLoadingImages(false);
       console.log(error);
       return null;
     } finally {
-      console.log(loadingImages);
     }
   };
-
-  useEffect(() => {
-    console.log(loadingImages);
-  }, [loadingImages]);
 
   const addFeature = () => {
     let theFeatures;
@@ -65,6 +66,8 @@ const ProductControl = ({ initial_state, put, id }) => {
         return { ...state, features: action.payload };
       case "ADD_IMAGES":
         return { ...state, images: [...state.images, ...action.payload] };
+      case "ADD_IMAGE":
+        return { ...state, images: [...state.images, action.payload] };
       case "DELETE_I":
         return { ...state, images: action.payload };
 
@@ -101,27 +104,36 @@ const ProductControl = ({ initial_state, put, id }) => {
   const imagesUpload = async (e) => {
     setLoadingImages(true);
     const files = e.target.files;
-    console.log(files);
+    setLoaders([...files]);
     const images = await Promise.all(
       [...files].map(async (file) => {
         const url = await upload(file);
-        console.log(url.url);
-        return url.url;
+
+        return { url: url.url, name: url.original_filename };
       })
     );
     dispatch({ type: "ADD_IMAGES", payload: images });
 
     setLoadingImages(false);
+    setLoaders([]);
   };
 
   return (
     <div>
-      <h1 className="capitalize font-semibold text-4xl">
-        {put ? "edit product" : "new product"}
-      </h1>
-      <form onSubmit={handleSubmit} className="mt-5 p-4 ">
+      <div className="flex items-center justify-between">
+        {" "}
+        <h1 className="capitalize font-semibold text-4xl">
+          {put ? "edit product" : "new product"}
+        </h1>
+        <Link href={"/products"} className="btn">
+          Go Back
+        </Link>
+      </div>
+
+      <form onSubmit={handleSubmit} className=" p-4 ">
         <div className="flex flex-col lg:flex-row gap-4">
           <div className="flex flex-col gap-1 flex-1">
+            <label className="label">Title*</label>
             <input
               autoComplete="off"
               value={state.name}
@@ -136,6 +148,7 @@ const ProductControl = ({ initial_state, put, id }) => {
                 })
               }
             />
+             <label className="label">Price*</label>
             <input
               className=" formInput w-full  "
               name="price"
@@ -147,9 +160,9 @@ const ProductControl = ({ initial_state, put, id }) => {
                   type: "INFO",
                   payload: { name: e.target.name, value: e.target.value },
                 });
-                console.log(state);
               }}
             />
+             <label className="label">Description*</label>
             <textarea
               className="resize-none formInput w-full  h-[200px]"
               name="desc"
@@ -165,6 +178,7 @@ const ProductControl = ({ initial_state, put, id }) => {
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
+          <label className="label">Category*</label>
             <select
               name="cat"
               className="formInput w-full cursor-pointer capitalize"
@@ -185,57 +199,63 @@ const ProductControl = ({ initial_state, put, id }) => {
               <option value="perfumes">perfumes</option>
             </select>
 
-            <div className="formInput flex">
-              <input
-                value={feature}
-                onChange={(e) => setFeature(e.target.value)}
-                className="  outline-none flex-1"
-                name="features"
-                type="text"
-                placeholder="Add features"
-              />{" "}
-              <button
-                disabled={!feature.trim()}
-                type="button"
-                className="btn disabled:bg-gray-500"
-                onClick={addFeature}
-              >
-                Add
-              </button>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              {state.features.map((el, i) => (
-                <div
-                  className="flex items-center gap-1 border border-black  min-w-[60px] justify-between px-2 cursor-default rounded-full"
-                  key={el + i}
+            <div className="formInput ">
+            <label className="label">Features</label>
+              <div className="flex gap-4">
+             
+                <input
+                  value={feature}
+                  onChange={(e) => setFeature(e.target.value)}
+                  className="  input flex-1"
+                  name="features"
+                  type="text"
+                  placeholder="Add features"
+                />{" "}
+                <button
+                  disabled={!feature.trim()}
+                  type="button"
+                  className="btn disabled:bg-gray-500"
+                  onClick={addFeature}
                 >
-                  {el}{" "}
-                  <span
-                    onClick={() =>
-                      dispatch({
-                        type: "DELETE_F",
-                        payload: state.features.filter(
-                          (feature) => feature !== el
-                        ),
-                      })
-                    }
-                    className="flex w-5 h-5 cursor-pointer items-center justify-center rounded-full bg-black text-white"
+                  Add
+                </button>
+              </div>
+
+              <div className="flex flex-wrap gap-3 py-5">
+                {state.features.map((el, i) => (
+                  <div
+                    className="flex items-center    min-w-[60px] justify-between pl-2  cursor-default"
+                    key={el + i}
                   >
-                    X
-                  </span>
-                </div>
-              ))}
+                    <span className=" border-t border-l border-b px-2"> {el}</span>
+                   {" "}
+                    <span
+                      onClick={() =>
+                        dispatch({
+                          type: "DELETE_F",
+                          payload: state.features.filter(
+                            (feature) => feature !== el
+                          ),
+                        })
+                      }
+                      className="flex w-5 h-full cursor-pointer items-center justify-center text-xs  bg-red-500 text-white"
+                    >
+                      X
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="p-4 border rounded-xl">
+            <div className="p-4 border rounded-md">
               <div className="flex items-center">
                 <p className="text-lg capitalize text-zinc-400 font-bold flex-1 ">
-                  Images
+                  {state.images.length === 0 ? "No Images" : "Images"}
                 </p>
                 <label
-                  className={`px-3 py-2 text-white bg-black rounded-lg cursor-pointer ${
-                    loadingImages && "bg-gray-500 cursor-auto pointer-events-none"
+                  className={`px-3 py-2 text-white bg-black rounded-md cursor-pointer ${
+                    loadingImages &&
+                    "bg-gray-500 cursor-auto pointer-events-none"
                   }`}
                   htmlFor="images"
                 >
@@ -252,28 +272,68 @@ const ProductControl = ({ initial_state, put, id }) => {
                   onChange={imagesUpload}
                 />
               </div>
+              <p className="py-4 text-center text-xl font-semibold text-gray-500">
+                OR
+              </p>
+              <div className="flex items-center gap-4">
+                <input
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  type="text"
+                  placeholder="Add Image Url"
+                  className="flex-1 p-1 input"
+                />
+                <button
+                  disabled={!imageUrl.trim()}
+                  className="btn disabled:bg-gray-500"
+                  onClick={()=>{dispatch({type:"ADD_IMAGE",payload:{url:imageUrl,original_filename:''}});setImageUrl('')}}
+                >
+                  Add
+                </button>
+              </div>
               <div className="flex flex-wrap gap-2 mt-3">
                 {state.images.length > 0 &&
                   state.images?.map((el, i) => (
-                    <div className="relative w-[70px] h-[70px]  ">
+                    <div
+                      className="relative w-[100px] h-[100px]  border rounded-md "
+                      key={el.url + i}
+                    >
                       <span
-                        onClick={() =>
+                        onClick={() => {
                           dispatch({
                             type: "DELETE_I",
                             payload: state.images.filter(
                               (image) => image !== el
                             ),
-                          })
-                        }
-                        className="absolute -top-1 -right-1 w-4 h-4 rounded-md bg-red-600 p-2 text-xs cursor-pointer rounded-full flex items-center justify-center text-white "
+                          });
+                        }}
+                        className="absolute -top-1 -right-1 w-4 h-4  bg-red-500 p-2 text-xs cursor-pointer rounded-full flex items-center justify-center text-white "
                       >
                         X
                       </span>
                       <img
-                        src={el}
-                        key={el + i}
+                        src={el.url}
                         alt="product-images"
-                        className=" object-cover w-full h-full"
+                        className=" object-cover w-full h-full rounded-md"
+                      />
+                    </div>
+                  ))}
+
+                {loadingImages &&
+                  loaders.map((el) => (
+                    <div className="h-[100px] w-[100px] flex items-center justify-center border rounded-md">
+                      {" "}
+                      <BounceLoader
+                        color={"orange"}
+                        loading={loadingImages}
+                        cssOverride={{
+                          display: "block",
+                          margin: "0 auto",
+                          borderColor: "red",
+                        }}
+                        size={75}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
                       />
                     </div>
                   ))}
@@ -292,7 +352,7 @@ const ProductControl = ({ initial_state, put, id }) => {
             state.images.length === 0
           }
           type="submit"
-          className=" disabled:bg-gray-500 btn mt-8 w-full lg:w-1/2"
+          className=" disabled:bg-gray-500 btn mt-3 w-full lg:w-1/2"
         >
           {loading ? "Loading..." : put ? "Edit Product" : "Add Product"}
         </button>

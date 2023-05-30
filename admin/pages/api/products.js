@@ -23,9 +23,9 @@ const handler = async (req, res) => {
   }
 
 
-  verifyToken(req, res);
+ 
   if(req.method === "PUT"){
-
+    verifyToken(req, res);
     const id = req.query.id;
     const { name, desc, price, cat, features ,images} = req.body;
     if (!name || !desc || !price || !cat ||images.length===0)
@@ -45,6 +45,7 @@ const handler = async (req, res) => {
 
 if(req.method==="POST")
   {
+    verifyToken(req, res);
 console.log('post')
     const { name, desc, price, cat, features,images } = req.body;
   if (!name || !desc || !price || !cat || images.length ===0)
@@ -59,7 +60,7 @@ console.log('post')
 
 
   if(req.method==="DELETE"){
-   
+    verifyToken(req, res);
     console.log('DELETE')
     const id = req.query.id;
     console.log(id)

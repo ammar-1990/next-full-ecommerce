@@ -4,6 +4,7 @@ import { HomeIcon } from "@heroicons/react/24/outline";
 import { ArchiveBoxIcon } from "@heroicons/react/24/outline";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
 import { PresentationChartBarIcon } from "@heroicons/react/24/outline";
+import { QueueListIcon } from "@heroicons/react/24/outline";
 import NavLinkAside from "./NavLinkAside";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -23,6 +24,12 @@ const Layout = ({ children }) => {
       Icon: ArchiveBoxIcon,
       active: router.asPath.includes("/products") ? true : false,
       href: "/products",
+    },
+    {
+      name: "categories",
+      Icon: QueueListIcon,
+      active: router.asPath.includes("/categories") ? true : false,
+      href: "/categories",
     },
     {
       name: "orders",
