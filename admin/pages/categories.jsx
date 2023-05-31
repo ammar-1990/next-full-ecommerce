@@ -4,6 +4,8 @@ import { useRef, useState } from "react";
 import usePostFetch from "@/hooks/usePostFetch";
 import { useRouter } from "next/router";
 import { newAxios } from "@/lib/axios";
+import { PencilSquareIcon } from "@heroicons/react/24/outline";
+import { TrashIcon } from "@heroicons/react/24/outline";
 
 const categories = ({ user, cats }) => {
   const [category, setCategory] = useState("");
@@ -12,9 +14,8 @@ const categories = ({ user, cats }) => {
   const [error, setError] = useState("");
   const [parentCat, setParentCat] = useState("");
   const [edit, setEdit] = useState(null);
-  const [toDelete,setToDelete] = useState(null)
-  const [deletLoading,setDeleteLoading] = useState(false)
-  
+  const [toDelete, setToDelete] = useState(null);
+  const [deletLoading, setDeleteLoading] = useState(false);
 
   const router = useRouter();
 
@@ -81,29 +82,22 @@ const categories = ({ user, cats }) => {
     setParentCat("");
   };
 
-
-
-const handleDelete = async()=>{
-
+  const handleDelete = async () => {
     try {
-        setDeleteLoading(true);
-console.log(toDelete._id)
-        setError("");
-        const res = await newAxios.delete(`/categories?id=${toDelete._id}`);
-        console.log(res.data);
-        
-        setCategories(prev=>prev.filter(el=>el._id!== res.data._id))
-        setToDelete(false)
-        
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setDeleteLoading(false);
-        
-      }
-}
+      setDeleteLoading(true);
+      console.log(toDelete._id);
+      setError("");
+      const res = await newAxios.delete(`/categories?id=${toDelete._id}`);
+      console.log(res.data);
 
-
+      setCategories((prev) => prev.filter((el) => el._id !== res.data._id));
+      setToDelete(false);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -157,25 +151,49 @@ console.log(toDelete._id)
               (edit?.name === category.trim() &&
                 edit.parentCategory === parentCat)
             }
-            className={`py-2 rounded-md text-white bg-black disabled:bg-gray-500 w-full ${edit&&'bg-orange-400'}`}
+            className={`py-2 rounded-md text-white bg-black disabled:bg-gray-500 w-full ${
+              edit && "bg-orange-400"
+            }`}
           >
             {loading ? "Loading..." : edit ? "Edit" : "Add"}
           </button>
           {edit && (
-            <button type="button" onClick={cancelEdit} className="btn ">
+            <button
+              type="button"
+              onClick={cancelEdit}
+              className="btn border-black hover:bg-transparent hover: hover:text-black  border duration-300 "
+            >
               Cancel
             </button>
           )}
         </div>
-        {toDelete&&
-        <div className="flex items-center gap-1 flex-col lg:flex-row">
-            <p>Are you sure you want to delete <span className="capitalize font-bold">{toDelete.name}</span> category?</p>
-        
-        <div className="flex gap-2">
-            <button disabled={deletLoading} type="button" className="px-3 py-1 disabled:bg-red-300 text-white bg-red-500 rounded-md" onClick={handleDelete}>{deletLoading?'Deleting...':'Yes'}</button>
-            <button type="button" className="px-3 py-1 text-white bg-black rounded-md" onClick={()=>setToDelete(null)}>No</button>
-        </div>
-        </div>}
+        {toDelete && (
+          <div className="flex items-center gap-1 flex-col lg:flex-row">
+            <p>
+              Are you sure you want to delete{" "}
+              <span className="capitalize font-bold">{toDelete.name}</span>{" "}
+              category?
+            </p>
+
+            <div className="flex gap-2">
+              <button
+                disabled={deletLoading}
+                type="button"
+                className="px-3 py-1 disabled:bg-red-300 text-white bg-red-500 rounded-md  hover:bg-transparent hover:text-red-500 duration-300 border border-red-500"
+                onClick={handleDelete}
+              >
+                {deletLoading ? "Deleting..." : "Yes"}
+              </button>
+              <button
+                type="button"
+                className="px-3 py-1 text-white bg-black rounded-md border-black hover:bg-transparent hover: hover:text-black  border duration-300"
+                onClick={() => setToDelete(null)}
+              >
+                No
+              </button>
+            </div>
+          </div>
+        )}
       </form>
 
       {error && (
@@ -193,8 +211,8 @@ console.log(toDelete._id)
           </thead>
           <tbody className="">
             {categories.length === 0 && (
-              <tr>
-                <td className="uppercase p-3">no categories available</td>
+              <tr className="border border-gray-300">
+                <td className="uppercase p-3 ">no categories available</td>
               </tr>
             )}
             {categories.map((el) => (
@@ -204,16 +222,23 @@ console.log(toDelete._id)
                 </td>
 
                 <td className=" p-3 border border-gray-300 capitalize font-semibold">
-                  {el.parentCategory || "NONE"}
+                  {el.parentCategory}
                 </td>
                 <td className="text-white text-center border border-gray-300  p-3">
                   <button
                     onClick={() => handleEdit(el)}
-                    className="px-3 py-1 bg-black rounded-l-md"
+                    className="px-3 py-1 bg-black inline-flex items-center group gap-2 rounded-l-md border border-black hover:bg-transparent hover: hover:text-black border-r-0 duration-300"
                   >
+                    <PencilSquareIcon className="h-4 text-white group-hover:text-black duration-300" />
                     Edit
                   </button>
-                  <button onClick={()=>setToDelete(el)} className="px-3 py-1 bg-red-500 rounded-r-md">Delete</button>
+                  <button
+                    onClick={() => setToDelete(el)}
+                    className="px-3 py-1 bg-red-500 rounded-r-md border inline-flex items-center gap-2 border-red-500 hover:bg-transparent hover:text-red-500 border-l-0 duration-300 group"
+                  >
+                    <TrashIcon className="h-4 text-white group-hover:text-red-500 duration-300" />
+                    Delete
+                  </button>
                 </td>
               </tr>
             ))}

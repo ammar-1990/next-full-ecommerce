@@ -12,12 +12,10 @@ const Products = ({ user, products }) => {
   return (
     <div>
       <Head>
-        <title>
-          Products
-        </title>
+        <title>Products</title>
       </Head>
       <div></div>
-      <Link className="btn" href={"/products/new"}>
+      <Link className="btn border  border-black hover:bg-transparent hover:text-black duration-300 " href={"/products/new"}>
         Add new product
       </Link>
 
@@ -40,15 +38,17 @@ const Products = ({ user, products }) => {
                 <td className="p-2 border border-gray-300 ">{el.name}</td>
                 <td className="p-2 border border-gray-300 text-center">
                   <Link href={`/products/edit/${el._id}`}>
-                    <button className="px-3 py-1 text-white bg-black inline-flex items-center gap-1 rounded-l-md">
-                      <PencilSquareIcon className="h-4 text-white" />
+                    <button className="px-3 py-1 text-white bg-black inline-flex items-center group gap-1 rounded-l-md border-black hover:bg-transparent hover: hover:text-black  border duration-300">
+                      <PencilSquareIcon className="h-4 text-white group-hover:text-black duration-300" />
                       Edit
                     </button>
                   </Link>
-                 <Link href={`/products/delete/${el._id}`}><button className="px-3 py-1 text-white bg-red-500 inline-flex items-center gap-1 rounded-r-md">
-                    <TrashIcon className="h-4 text-white" />
-                    Delete
-                  </button></Link> 
+                  <Link href={`/products/delete/${el._id}`}>
+                    <button className="px-3 py-1 text-white bg-red-500 inline-flex group items-center gap-1 rounded-r-md border border-red-500 hover:bg-transparent hover:text-red-500 border-l-0 duration-300 group ">
+                      <TrashIcon className="h-4 text-white group-hover:text-red-500 duration-300" />
+                      Delete
+                    </button>
+                  </Link>
                 </td>
               </tr>
             ))}

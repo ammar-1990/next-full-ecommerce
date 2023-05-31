@@ -6,13 +6,15 @@ import axios from "axios";
 import Link from "next/link";
 import BounceLoader from "react-spinners/BounceLoader";
 
-const ProductControl = ({ initial_state, put, id }) => {
+const ProductControl = ({ initial_state, put, id, cats }) => {
   const { loading, error, addPost, putPost } = usePostFetch();
-  const [feature, setFeature] = useState("");
+  const [name, setName] = useState("");
+  const [value, setValue] = useState("");
   const [loadingImages, setLoadingImages] = useState(false);
   const [errorImages, setErrorImages] = useState("");
   const [loaders, setLoaders] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
+ 
 
   const upload = async (file) => {
     if (!file) {
@@ -42,24 +44,26 @@ const ProductControl = ({ initial_state, put, id }) => {
   };
 
   const addFeature = () => {
-    let theFeatures;
-    if (feature.includes(",")) {
-      theFeatures = feature.split(",");
+    let theValues;
 
-      dispatch({ type: "FEATURES_MANY", payload: theFeatures });
+    console.log(state.features)
+    if (value.includes(",")) {
+      theValues = value.split(",");
+
+      dispatch({ type: "FEATURES", payload:{name,  value:theValues }});
     } else {
-      dispatch({ type: "FEATURES", payload: feature });
+      dispatch({ type: "FEATURES", payload: {name,  value} });
     }
 
-    setFeature("");
+    setName("");
+    setValue('')
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
       case "INFO":
         return { ...state, [action.payload.name]: action.payload.value };
-      case "FEATURES_MANY":
-        return { ...state, features: [...state.features, ...action.payload] };
+   
       case "FEATURES":
         return { ...state, features: [...state.features, action.payload] };
       case "DELETE_F":
@@ -125,7 +129,10 @@ const ProductControl = ({ initial_state, put, id }) => {
         <h1 className="capitalize font-semibold text-4xl">
           {put ? "edit product" : "new product"}
         </h1>
-        <Link href={"/products"} className="btn">
+        <Link
+          href={"/products"}
+          className="btn border border-black hover:bg-transparent hover:text-black duration-300"
+        >
           Go Back
         </Link>
       </div>
@@ -148,7 +155,7 @@ const ProductControl = ({ initial_state, put, id }) => {
                 })
               }
             />
-             <label className="label">Price*</label>
+            <label className="label">Price*</label>
             <input
               className=" formInput w-full  "
               name="price"
@@ -162,7 +169,7 @@ const ProductControl = ({ initial_state, put, id }) => {
                 });
               }}
             />
-             <label className="label">Description*</label>
+            <label className="label">Description*</label>
             <textarea
               className="resize-none formInput w-full  h-[200px]"
               name="desc"
@@ -178,7 +185,7 @@ const ProductControl = ({ initial_state, put, id }) => {
             />
           </div>
           <div className="flex flex-col gap-1 flex-1">
-          <label className="label">Category*</label>
+            <label className="label">Category*</label>
             <select
               name="cat"
               className="formInput w-full cursor-pointer capitalize"
@@ -193,28 +200,36 @@ const ProductControl = ({ initial_state, put, id }) => {
               <option value="" disabled>
                 Select Category
               </option>
-              <option value="clothes">clothes</option>
-              <option value="food">food</option>
-              <option value="technology">technology</option>
-              <option value="perfumes">perfumes</option>
+              {cats.map((el) => (
+                <option key={el._id} value={el.name}>
+                  {el.name}
+                </option>
+              ))}
             </select>
 
             <div className="formInput ">
-            <label className="label">Features</label>
-              <div className="flex gap-4">
-             
+              <label className="label">Features</label>
+              <div className="flex gap-4 flex-col ">
                 <input
-                  value={feature}
-                  onChange={(e) => setFeature(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="  input flex-1"
-                  name="features"
+                 
                   type="text"
-                  placeholder="Add features"
+                  placeholder="Type : e.g. color"
+                />{" "}
+                <input
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  className="  input flex-1"
+                 
+                  type="text"
+                  placeholder="Value : e.g. red,blue,white"
                 />{" "}
                 <button
-                  disabled={!feature.trim()}
+                  disabled={!name.trim() || !value.trim()}
                   type="button"
-                  className="btn disabled:bg-gray-500"
+                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-black hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
                   onClick={addFeature}
                 >
                   Add
@@ -227,14 +242,18 @@ const ProductControl = ({ initial_state, put, id }) => {
                     className="flex items-center    min-w-[60px] justify-between pl-2  cursor-default"
                     key={el + i}
                   >
-                    <span className=" border-t border-l border-b px-2"> {el}</span>
-                   {" "}
+                    <span className=" border-t border-l border-b px-2 capitalize py-1">
+                      {" "}
+                      {el.name}: 
+                      {" "}
+                      {Array.isArray(el.value)?el.value.map(el=><span className="inline-block  bg-gray-200 relative mx-1 p-1 rounded-lg  " key={el}>{el}</span>): <span className="p-1 inline-block"> {el.value} </span>}
+                    </span>{" "}
                     <span
                       onClick={() =>
                         dispatch({
                           type: "DELETE_F",
                           payload: state.features.filter(
-                            (feature) => feature !== el
+                            (feature) => feature.name !== el.name
                           ),
                         })
                       }
@@ -253,9 +272,9 @@ const ProductControl = ({ initial_state, put, id }) => {
                   {state.images.length === 0 ? "No Images" : "Images"}
                 </p>
                 <label
-                  className={`px-3 py-2 text-white bg-black rounded-md cursor-pointer ${
+                  className={`px-3 py-2 text-white bg-black rounded-md cursor-pointer border  border-black hover:bg-transparent hover:text-black duration-300 ${
                     loadingImages &&
-                    "bg-gray-500 cursor-auto pointer-events-none"
+                    "bg-gray-500 cursor-auto pointer-events-none border-gray-500 "
                   }`}
                   htmlFor="images"
                 >
@@ -285,8 +304,14 @@ const ProductControl = ({ initial_state, put, id }) => {
                 />
                 <button
                   disabled={!imageUrl.trim()}
-                  className="btn disabled:bg-gray-500"
-                  onClick={()=>{dispatch({type:"ADD_IMAGE",payload:{url:imageUrl,original_filename:''}});setImageUrl('')}}
+                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-black hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
+                  onClick={() => {
+                    dispatch({
+                      type: "ADD_IMAGE",
+                      payload: { url: imageUrl, original_filename: "" },
+                    });
+                    setImageUrl("");
+                  }}
                 >
                   Add
                 </button>
@@ -349,10 +374,16 @@ const ProductControl = ({ initial_state, put, id }) => {
             !state.price ||
             !state.cat ||
             loading ||
-            state.images.length === 0
+            state.images.length === 0 ||
+            (initial_state?.name === state.name.trim() &&
+              initial_state?.desc === state.desc.trim() &&
+              initial_state?.features.length === state.features.length &&
+              initial_state?.price.toString() === state.price.toString() &&
+              initial_state?.cat === state.cat &&
+              initial_state?.images.length === state.images.length)
           }
           type="submit"
-          className=" disabled:bg-gray-500 btn mt-3 w-full lg:w-1/2"
+          className=" disabled:bg-gray-500 disabled:border-gray-500 disabled:hover:text-white btn mt-3 w-full lg:w-1/2 border  border-black hover:bg-transparent hover:text-black duration-300"
         >
           {loading ? "Loading..." : put ? "Edit Product" : "Add Product"}
         </button>
