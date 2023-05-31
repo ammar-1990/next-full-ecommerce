@@ -242,13 +242,13 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                     className="flex items-center    min-w-[60px] justify-between pl-2  cursor-default"
                     key={el + i}
                   >
-                    <span className=" border-t border-l border-b px-2 capitalize py-1">
+                    <span className=" border px-2 capitalize py-1 relative">
                       {" "}
                       {el.name}: 
                       {" "}
                       {Array.isArray(el.value)?el.value.map(el=><span className="inline-block  bg-gray-200 relative mx-1 p-1 rounded-lg  " key={el}>{el}</span>): <span className="p-1 inline-block"> {el.value} </span>}
-                    </span>{" "}
-                    <span
+                   
+                      <span
                       onClick={() =>
                         dispatch({
                           type: "DELETE_F",
@@ -257,10 +257,12 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                           ),
                         })
                       }
-                      className="flex w-5 h-full cursor-pointer items-center justify-center text-xs  bg-red-500 text-white"
+                      className="flex w-4 h-4 -top-2 -right-2 rounded-full cursor-pointer items-center justify-center text-xs absolute   bg-red-500 text-white"
                     >
                       X
                     </span>
+                    </span>{" "}
+                   
                   </div>
                 ))}
               </div>
