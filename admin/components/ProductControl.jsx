@@ -14,7 +14,6 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
   const [errorImages, setErrorImages] = useState("");
   const [loaders, setLoaders] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
- 
 
   const upload = async (file) => {
     if (!file) {
@@ -46,24 +45,24 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
   const addFeature = () => {
     let theValues;
 
-    console.log(state.features)
+    console.log(state.features);
     if (value.includes(",")) {
       theValues = value.split(",");
 
-      dispatch({ type: "FEATURES", payload:{name,  value:theValues }});
+      dispatch({ type: "FEATURES", payload: { name, value: theValues } });
     } else {
-      dispatch({ type: "FEATURES", payload: {name,  value} });
+      dispatch({ type: "FEATURES", payload: { name, value } });
     }
 
     setName("");
-    setValue('')
+    setValue("");
   };
 
   const reducer = (state, action) => {
     switch (action.type) {
       case "INFO":
         return { ...state, [action.payload.name]: action.payload.value };
-   
+
       case "FEATURES":
         return { ...state, features: [...state.features, action.payload] };
       case "DELETE_F":
@@ -129,12 +128,6 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
         <h1 className="capitalize font-semibold text-4xl">
           {put ? "edit product" : "new product"}
         </h1>
-        <Link
-          href={"/products"}
-          className="btn border border-black hover:bg-transparent hover:text-black duration-300"
-        >
-          Go Back
-        </Link>
       </div>
 
       <form onSubmit={handleSubmit} className=" p-4 ">
@@ -214,7 +207,6 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   className="  input flex-1"
-                 
                   type="text"
                   placeholder="Type : e.g. color"
                 />{" "}
@@ -222,7 +214,6 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                   value={value}
                   onChange={(e) => setValue(e.target.value)}
                   className="  input flex-1"
-                 
                   type="text"
                   placeholder="Value : e.g. red,blue,white"
                 />{" "}
@@ -242,27 +233,38 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                     className="flex items-center    min-w-[60px] justify-between pl-2  cursor-default"
                     key={el + i}
                   >
-                    <span className=" border px-2 capitalize py-1 relative">
+                    <div className=" border px-2 capitalize py-1 relative z-[2] flex items-center">
                       {" "}
-                      {el.name}: 
-                      {" "}
-                      {Array.isArray(el.value)?el.value.map(el=><span className="inline-block  bg-gray-200 relative mx-1 p-1 rounded-lg  " key={el}>{el}</span>): <span className="p-1 inline-block"> {el.value} </span>}
-                   
+                      {el.name}:{" "}
+                      <div className="flex items-center flex-wrap gap-1 px-1">
+                        {" "}
+                        {Array.isArray(el.value) ? (
+                          el.value.map((el) => (
+                            <span
+                              className="inline-block  bg-gray-200 relative z-[2] p-1 px-2 rounded-lg  "
+                              key={el}
+                            >
+                              {el}
+                            </span>
+                          ))
+                        ) : (
+                          <span className="p-1 inline-block"> {el.value} </span>
+                        )}{" "}
+                      </div>
                       <span
-                      onClick={() =>
-                        dispatch({
-                          type: "DELETE_F",
-                          payload: state.features.filter(
-                            (feature) => feature.name !== el.name
-                          ),
-                        })
-                      }
-                      className="flex w-4 h-4 -top-2 -right-2 rounded-full cursor-pointer items-center justify-center text-xs absolute   bg-red-500 text-white"
-                    >
-                      X
-                    </span>
-                    </span>{" "}
-                   
+                        onClick={() =>
+                          dispatch({
+                            type: "DELETE_F",
+                            payload: state.features.filter(
+                              (feature) => feature.name !== el.name
+                            ),
+                          })
+                        }
+                        className="flex w-4 h-4 -top-2 -right-2 rounded-full cursor-pointer items-center justify-center text-xs absolute   bg-red-500 text-white"
+                      >
+                        X
+                      </span>
+                    </div>{" "}
                   </div>
                 ))}
               </div>
@@ -322,7 +324,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                 {state.images.length > 0 &&
                   state.images?.map((el, i) => (
                     <div
-                      className="relative w-[100px] h-[100px]  border rounded-md "
+                      className="relative z-[2] w-[100px] h-[100px]  border rounded-md "
                       key={el.url + i}
                     >
                       <span
@@ -393,6 +395,12 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
           <p className="text-xs text-red-500 py-4">{error.response.data}</p>
         )}
       </form>
+      <Link
+        href={"/products"}
+        className="btn border border-black hover:bg-transparent hover:text-black duration-300 block w-fit ml-auto mt-5"
+      >
+        Go Back
+      </Link>
     </div>
   );
 };

@@ -2,34 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-.input{
-  @apply w-full p-3 bg-transparent border-b outline-none focus:border-b-orange-400 focus:border-b-2 rounded-sm 
+.input {
+  @apply w-full p-3 py-2 bg-transparent border-b outline-none focus:border-b-orange-400 focus:border-b-2 rounded-sm;
 }
 
-
-.btn{
-  @apply bg-black px-3 py-2 text-white rounded-md
+.btn {
+  @apply bg-black px-3 py-2 text-white rounded-md;
 }
-
 
 .label {
-  @apply capitalize
+  @apply capitalize;
 }
 
-.formInput{
-  @apply p-3 border rounded-md outline-none focus:ring-2 focus:ring-orange-400
+.formInput {
+  @apply p-3 py-2 border rounded-md outline-none focus:ring-2 focus:ring-orange-400;
 }
 
-
-.myScroll::-webkit-scrollbar{
-  @apply w-[5px]
+.myScroll::-webkit-scrollbar {
+  @apply w-[5px];
 }
 
-.myScroll::-webkit-scrollbar-thumb{
-  @apply bg-black
+.myScroll::-webkit-scrollbar-thumb {
+  @apply bg-black;
 }
 
-
-.label{
-  @apply px-4 text-zinc-400 font-semibold text-lg py-1
+.label {
+  @apply px-4 text-zinc-400 font-semibold text-lg py-1;
 }

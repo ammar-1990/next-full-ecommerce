@@ -1,6 +1,6 @@
 import React from "react";
 
-const NavLinkAside = ({ name, Icon, active, logo }) => {
+const NavLinkAside = ({ name, Icon, active, logo, Solid }) => {
   return (
     <div
       className={`flex items-center  gap-3 w-full p-3 ${
@@ -11,7 +11,7 @@ const NavLinkAside = ({ name, Icon, active, logo }) => {
         "hover:scale-105 rounded-l-xl hover:bg-orange-500"
       } duration-300`}
     >
-      <Icon className=" h-6" />
+      {active ? <Solid className="h-6 " /> : <Icon className=" h-6" />}
       <span
         className={`capitalize ${
           logo && "text-xl font-bold cursor-default text-orange-500"

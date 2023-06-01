@@ -200,41 +200,41 @@ const categories = ({ user, cats }) => {
         <p className="text-red-500 py-4 text-xs">{error.response.data}</p>
       )}
 
-      <div className="mt-2 p-4 pt-0 max-h-[500px] overflow-y-scroll myScroll ">
-        <table className="w-full border border-black">
+      <div className="mt-2 p-1 sm:p-4 pt-0 max-h-[500px] overflow-y-scroll myScroll  ">
+        <table className="w-full border border-black  ">
           <thead className="bg-black text-white capitalize ">
             <tr>
-              <td className="p-3  border-r border-gray-300">category name</td>
-              <td className="p-3  border-r border-gray-300">Parent Category</td>
-              <td className="p-3">Actions</td>
+              <td className="sm:p-3 p-1 text-xs sm:text-base  border-r border-gray-300">category name</td>
+              <td className="sm:p-3 p-1 text-xs sm:text-base  border-r border-gray-300">Parent Category</td>
+              <td className="sm:p-3 p-1 text-xs sm:text-base">Actions</td>
             </tr>
           </thead>
           <tbody className="">
             {categories.length === 0 && (
               <tr className="border border-gray-300">
-                <td className="uppercase p-3 ">no categories available</td>
+                <td className="uppercase p-2 ">no categories available</td>
               </tr>
             )}
             {categories.map((el) => (
               <tr key={el._id} className="even:bg-zinc-200 bg-zinc-100">
-                <td className=" p-3 border border-gray-300 capitalize font-semibold">
+                <td className=" p-1 sm:p-2 border border-gray-300 capitalize font-semibold text-xs sm:text-base">
                   {el.name}
                 </td>
 
-                <td className=" p-3 border border-gray-300 capitalize font-semibold">
+                <td className=" p-1 sm:p-2 border border-gray-300 capitalize font-semibold text-xs sm:text-base">
                   {el.parentCategory}
                 </td>
-                <td className="text-white text-center border border-gray-300  p-3">
+                <td className="text-white text-center border border-gray-300  p-1 sm:p-3 text-xs sm:text-base">
                   <button
                     onClick={() => handleEdit(el)}
-                    className="px-3 py-1 bg-black inline-flex items-center group gap-2 rounded-l-md border border-black hover:bg-transparent hover: hover:text-black border-r-0 duration-300"
+                    className="px-3 py-1 bg-black inline-flex items-center group gap-2 sm:rounded-l-md border w-full sm:w-auto border-black hover:bg-transparent hover: hover:text-black sm:border-r-0 duration-300"
                   >
                     <PencilSquareIcon className="h-4 text-white group-hover:text-black duration-300" />
                     Edit
                   </button>
                   <button
                     onClick={() => setToDelete(el)}
-                    className="px-3 py-1 bg-red-500 rounded-r-md border inline-flex items-center gap-2 border-red-500 hover:bg-transparent hover:text-red-500 border-l-0 duration-300 group"
+                    className="px-3 py-1 bg-red-500 w-full sm:w-auto sm:rounded-r-md border inline-flex items-center gap-2 border-red-500 hover:bg-transparent hover:text-red-500 sm:border-l-0 duration-300 group"
                   >
                     <TrashIcon className="h-4 text-white group-hover:text-red-500 duration-300" />
                     Delete
