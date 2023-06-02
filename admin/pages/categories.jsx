@@ -151,7 +151,7 @@ const categories = ({ user, cats }) => {
               (edit?.name === category.trim() &&
                 edit.parentCategory === parentCat)
             }
-            className={`py-2 rounded-md text-white bg-black disabled:bg-gray-500 w-full ${
+            className={`py-2 rounded-md text-white bg-zinc-800 disabled:bg-gray-500 w-full ${
               edit && "bg-orange-400"
             }`}
           >
@@ -161,7 +161,7 @@ const categories = ({ user, cats }) => {
             <button
               type="button"
               onClick={cancelEdit}
-              className="btn border-black hover:bg-transparent hover: hover:text-black  border duration-300 "
+              className="btn border-zinc-800 hover:bg-transparent hover: hover:text-black  border duration-300 "
             >
               Cancel
             </button>
@@ -186,7 +186,7 @@ const categories = ({ user, cats }) => {
               </button>
               <button
                 type="button"
-                className="px-3 py-1 text-white bg-black rounded-md border-black hover:bg-transparent hover: hover:text-black  border duration-300"
+                className="px-3 py-1 text-white bg-zinc-800 rounded-md border-zinc-800 hover:bg-transparent hover: hover:text-black  border duration-300"
                 onClick={() => setToDelete(null)}
               >
                 No
@@ -201,8 +201,8 @@ const categories = ({ user, cats }) => {
       )}
 
       <div className="mt-2 p-1 sm:p-4 pt-0 max-h-[500px] overflow-y-scroll myScroll  ">
-        <table className="w-full border border-black  ">
-          <thead className="bg-black text-white capitalize ">
+        <table className="w-full border border-zinc-800  ">
+          <thead className="bg-zinc-800 text-white capitalize ">
             <tr>
               <td className="sm:p-3 p-1 text-xs sm:text-base  border-r border-gray-300">category name</td>
               <td className="sm:p-3 p-1 text-xs sm:text-base  border-r border-gray-300">Parent Category</td>
@@ -227,7 +227,7 @@ const categories = ({ user, cats }) => {
                 <td className="text-white text-center border border-gray-300  p-1 sm:p-3 text-xs sm:text-base">
                   <button
                     onClick={() => handleEdit(el)}
-                    className="px-3 py-1 bg-black inline-flex items-center group gap-2 sm:rounded-l-md border w-full sm:w-auto border-black hover:bg-transparent hover: hover:text-black sm:border-r-0 duration-300"
+                    className="px-3 py-1 bg-zinc-800 inline-flex items-center group gap-2 sm:rounded-l-md border w-full sm:w-auto border-zinc-800 hover:bg-transparent hover: hover:text-black sm:border-r-0 duration-300"
                   >
                     <PencilSquareIcon className="h-4 text-white group-hover:text-black duration-300" />
                     Edit

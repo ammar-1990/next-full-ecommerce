@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
   const [showNav, setShowNav] = useState(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-black">
+    <div className="flex flex-col min-h-screen bg-zinc-800">
     
         <div className="lg:hidden flex justify-between items-center px-4 z-10">
           <Link href={'/'}>
@@ -96,11 +96,11 @@ const Layout = ({ children }) => {
       
       <div className="flex-1 flex ">
         {showNav && (
-          <div className="fixed h-screen w-screen top-0 left-0 z-[5]  bg-black/80 " />
+          <div className="fixed h-screen w-screen top-0 left-0 z-[5]  bg-zinc-800/80 " />
         )}
 
         <aside
-          className={`w-[300px]  text-white p-4 py-7 pr-0 overflow-hidden lg:static flex flex-col top-0  fixed z-30  bg-black h-screen ${
+          className={`w-[300px]  text-white p-4 py-7 pr-0 overflow-hidden lg:static flex flex-col top-0  fixed z-30  bg-zinc-800 h-screen ${
             showNav ? "left-0" : "-left-[300px]"
           } duration-300`}
         >

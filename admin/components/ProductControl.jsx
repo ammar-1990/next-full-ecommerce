@@ -125,7 +125,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
     <div>
       <div className="flex items-center justify-between">
         {" "}
-        <h1 className="capitalize font-semibold text-4xl">
+        <h1 className="capitalize font-semibold text-zinc-800 text-4xl">
           {put ? "edit product" : "new product"}
         </h1>
       </div>
@@ -220,7 +220,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                 <button
                   disabled={!name.trim() || !value.trim()}
                   type="button"
-                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-black hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
+                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-zinc-800 hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
                   onClick={addFeature}
                 >
                   Add
@@ -276,7 +276,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                   {state.images.length === 0 ? "No Images" : "Images"}
                 </p>
                 <label
-                  className={`px-3 py-2 text-white bg-black rounded-md cursor-pointer border  border-black hover:bg-transparent hover:text-black duration-300 ${
+                  className={`px-3 py-2 text-white bg-zinc-800 rounded-md cursor-pointer border  border-zinc-800 hover:bg-transparent hover:text-black duration-300 ${
                     loadingImages &&
                     "bg-gray-500 cursor-auto pointer-events-none border-gray-500 "
                   }`}
@@ -308,7 +308,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
                 />
                 <button
                   disabled={!imageUrl.trim()}
-                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-black hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
+                  className="btn disabled:bg-gray-500 disabled:border-gray-500 border  border-zinc-800 hover:bg-transparent hover:text-black duration-300 disabled:hover:text-white"
                   onClick={() => {
                     dispatch({
                       type: "ADD_IMAGE",
@@ -387,7 +387,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
               initial_state?.images.length === state.images.length)
           }
           type="submit"
-          className=" disabled:bg-gray-500 disabled:border-gray-500 disabled:hover:text-white btn mt-3 w-full lg:w-1/2 border  border-black hover:bg-transparent hover:text-black duration-300"
+          className=" disabled:bg-gray-500 disabled:border-gray-500 disabled:hover:text-white btn mt-3 w-full lg:w-1/2 border  border-zinc-800 hover:bg-transparent hover:text-black duration-300"
         >
           {loading ? "Loading..." : put ? "Edit Product" : "Add Product"}
         </button>
@@ -397,7 +397,7 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
       </form>
       <Link
         href={"/products"}
-        className="btn border border-black hover:bg-transparent hover:text-black duration-300 block w-fit ml-auto mt-5"
+        className="btn border border-zinc-800 hover:bg-transparent hover:text-black duration-300 block w-fit ml-auto mt-5"
       >
         Go Back
       </Link>

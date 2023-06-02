@@ -15,13 +15,13 @@ const Products = ({ user, products }) => {
         <title>Products</title>
       </Head>
       <div></div>
-      <Link className="btn border  border-black hover:bg-transparent hover:text-black duration-300 " href={"/products/new"}>
+      <Link className="btn border  border-zinc-800 hover:bg-transparent hover:text-black duration-300 " href={"/products/new"}>
         Add new product
       </Link>
 
       <div className="mt-8 p-4 max-h-[500px] overflow-y-scroll myScroll ">
-        <table className="w-full  capitalize border border-black ">
-          <thead className="bg-black text-white ">
+        <table className="w-full  capitalize border border-zinc-800 ">
+          <thead className="bg-zinc-800 text-white ">
             <tr>
               <td className="p-4 border-r border-gray-300 text-sm md:text-base">Product name</td>
               <td className="p-4 text-sm md:text-base">actions</td>
@@ -38,7 +38,7 @@ const Products = ({ user, products }) => {
                 <td className="p-2 border border-gray-300 ">{el.name}</td>
                 <td className="p-2 border border-gray-300 text-center ">
                   <Link href={`/products/edit/${el._id}`}>
-                    <button className="px-3 py-1 text-white bg-black inline-flex items-center w-full sm:w-auto group gap-1 sm:rounded-l-md text-xs sm:text-base border-black hover:bg-transparent sm:border-r-0 hover:text-black  border duration-300">
+                    <button className="px-3 py-1 text-white bg-zinc-800 inline-flex items-center w-full sm:w-auto group gap-1 sm:rounded-l-md text-xs sm:text-base border-zinc-800 hover:bg-transparent sm:border-r-0 hover:text-black  border duration-300">
                       <PencilSquareIcon className="h-4 text-white group-hover:text-black duration-300" />
                       Edit
                     </button>

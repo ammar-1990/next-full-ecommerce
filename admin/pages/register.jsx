@@ -35,11 +35,11 @@ const router = useRouter()
     return (
         <div className='h-screen bg-black flex items-center justify-center p-3'>
             <form onSubmit={handleSubmit} className='max-w-[400px] bg-white w-full p-4 flex flex-col gap-8 rounded-sm'>
-                <h1 className='text-5xl text-orange-400 capitalize'>Register</h1>
+                <h1 className='text-5xl text-indigo-500 capitalize'>Register</h1>
                 <input required onChange={e=>setUsername(e.target.value)} value={username} className='input' type='text'  placeholder='username'/>
                 <input required onChange={e=>setEmail(e.target.value)} value={email} className='input' type='email'  placeholder='email'/>
                 <input required min={6} onChange={e=>setPassword(e.target.value)} value={password} className='input' type='password' placeholder='password'/>
-                <button disabled={!email || !password || !username || loading} className='bg-orange-400 outline-none text-white py-3 rounded-sm disabled:bg-gray-400'>{loading ? 'Loading...':"Register"}</button>
+                <button disabled={!email || !password || !username || loading} className='bg-indigo-500 outline-none text-white py-3 rounded-sm disabled:bg-gray-400'>{loading ? 'Loading...':"Register"}</button>
                 <p>Already have an account? <Link href={'/login'} className='hover:underline'>Login.</Link></p>
                 {error&&<p className='py-2 uppercase text-red-500 text-xs'>{error.response.data}</p>}
             </form>
