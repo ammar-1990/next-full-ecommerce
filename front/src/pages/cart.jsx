@@ -20,9 +20,6 @@ const cart = () => {
 const total = useSelector(getTotal)
 
 
-const ids = cart.map(el=>el._id)
-const unique = new Set(ids)
-const toShow = [...unique].map(el=>cart.find(product=>product._id===el))
 
 
 
@@ -53,18 +50,18 @@ if(loading) return 'Loading...'
     </tr>
   </thead>
   <tbody className="">
-    {toShow.length===0 &&<tr><td>No products in your cart</td></tr>}
-    {toShow.map(el=><tr className="" key={el._id}>
+    {cart.length===0 &&<tr><td>No products in your cart</td></tr>}
+    {cart.map(el=><tr className="" key={el._id}>
       <td> <div className="flex flex-col"><img className="w-28 h-28 object-contain" src={el.images[0].url} /><p className="text-lg py-2 text-gray-800 w-fit">{el.name}</p></div></td>
       <td>
         <div className="flex items-center gap-1">
         <span className="flex items-center justify-center w-8 h-8 bg-zinc-300 rounded-md cursor-pointer text-zinc-600" onClick={()=>dispatch(addToCart(el))}>+</span>
-        <span>{cart.filter(product=>product._id===el._id).length}</span>
+        <span>{el.amount}</span>
         <span className="flex items-center justify-center w-8 h-8 bg-zinc-300 rounded-md cursor-pointer text-zinc-600" onClick={()=>dispatch(removeFromCart(el))}>-</span>
         
         </div>
         </td>
-      <td className="font-semibold ">${el.price*cart.filter(product=>product._id===el._id).length}</td>
+      <td className="font-semibold ">${el.price*el.amount}</td>
     </tr>)}
   </tbody>
 </table>

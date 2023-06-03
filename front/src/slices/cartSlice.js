@@ -29,7 +29,19 @@ state.loading=false
         },
 
         addToCart :(state,action)=>{
-            state.cart.push(action.payload)
+          const exist = state.cart.find(el=>el._id===action.payload._id)
+          if(exist){
+            state.cart=state.cart.map(el=>{
+                if(el._id===action.payload._id) return ({...el,amount:el.amount+1})
+                else {
+                    return el
+                }
+            })
+          }
+
+          else {
+            state.cart.push({...action.payload,amount:1})
+          }
             localStorage.setItem('cart',JSON.stringify(state.cart))
         },
 
@@ -38,11 +50,20 @@ state.loading=false
 
 
         removeFromCart:(state,action)=>{
-const index = state.cart.findIndex(el=>el._id===action.payload._id)
-const copy = [...state.cart]
-copy.splice(index,1)
+            const element = state.cart.find(el=>el._id===action.payload._id)
+            if(element.amount===1){
+                state.cart=state.cart.filter(el=>el._id!==action.payload._id)
+            }
 
-state.cart = [...copy]
+            else{
+                state.cart=state.cart.map(el=>{
+                    if(el._id===action.payload._id) return ({...el,amount:el.amount-1})
+                    else{
+                        return el
+                    }
+                })
+            }
+
 localStorage.setItem('cart',JSON.stringify(state.cart))
         }
     }
@@ -54,6 +75,7 @@ localStorage.setItem('cart',JSON.stringify(state.cart))
 export const {addToCart,removeFromCart ,getAll} = cartSlice.actions
 
 export const getCart = (state)=>state.cart
-export const getTotal = (state)=>state.cart.cart.reduce((total,el)=>total+el.price,0)
+export const getTotal = (state)=>state.cart.cart.reduce((total,el)=>total+el.price*el.amount,0)
+export const getAmount = (state)=>state.cart.cart.reduce((total,el)=>total + el.amount,0)
 
 export default cartSlice.reducer

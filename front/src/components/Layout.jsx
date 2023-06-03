@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
-import { getAll, getCart } from "@/slices/cartSlice";
+import { getAll, getAmount, getCart } from "@/slices/cartSlice";
 
 const Layout = ({ children }) => {
   const [menu, setMenu] = useState(false);
@@ -50,7 +50,7 @@ useEffect(()=>{
     dispatch(getAll())
 },[])
 
-
+const amount = useSelector(getAmount)
 if(loading) return 'loading..'
 
   return (
@@ -58,9 +58,9 @@ if(loading) return 'loading..'
       <header
         className={` ${
           scroll ? "bg-white" : "bg-zinc-800"
-        } duration-300  sticky top-0 ${
+        } duration-300 z-30 sticky top-0 ${
           scroll && "shadow-sm"
-        } shadow-zinc-800 relative`}
+        } shadow-zinc-800 relative`} 
       >
         <div
           className={`flex justify-between max-w-[1100px] mx-auto p-6 px-5 ${
@@ -74,13 +74,13 @@ if(loading) return 'loading..'
           <nav className="md:flex items-center hidden   gap-8 capitalize  font-semibold text-sm">
             {navLinks.map((el, i) => (
               <Link key={i} href={el.to}>
-                {el.name} {el.name === "cart" && `(${cart.length})`}
+                {el.name} {el.name === "cart" && `(${amount})`}
               </Link>
             ))}
           </nav>
-          {menu && (
+        
             <div
-              className={`flex flex-col absolute top-[100%] text-center p-2 right-0 w-full capitalize rounded-b-lg ${
+              className={`flex flex-col absolute top-[100%] text-center ${menu ? "h-[300px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
                 scroll ? " bg-zinc-800 text-white" : " bg-white text-zinc-800"
               }`}
             >
@@ -93,11 +93,11 @@ if(loading) return 'loading..'
                   key={i}
                   href={el.to}
                 >
-                  {el.name} {el.name === "cart" && `(${cart.length})`}
+                  {el.name} {el.name === "cart" && `(${amount})`}
                 </Link>
               ))}{" "}
             </div>
-          )}
+          
           <span
             onClick={() => setMenu((prev) => !prev)}
             className={`md:hidden w-8 h-8 flex items-center ${

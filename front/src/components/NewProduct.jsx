@@ -1,6 +1,8 @@
 import { ShoppingCartIcon } from "@heroicons/react/24/solid";
 import { useDispatch } from "react-redux";
 import { addToCart } from "@/slices/cartSlice";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import Link from "next/link";
 const NewProduct = ({ name, desc, features, images, cat, price ,_id,createdAt,updatedAt}) => {
 
@@ -14,7 +16,17 @@ dispatch(addToCart(product))
 
   return (
     <div className="col-span-6 md:col-span-3 lg:col-span-2  mb-4 flex flex-col gap-1 bg-white rounded-md">
-      <img src={images[0].url} className="aspect-square object-contain" />
+      <Swiper
+     className="w-full"
+      slidesPerView={1}
+      spaceBetween={20}
+    
+    >
+    {images.map(el=> <SwiperSlide className=" "><img className="object-contain aspect-square w-full " src={el.url} alt={name} /></SwiperSlide>)} 
+    
+      ...
+    </Swiper>
+   
       <div className="p-5 py-0 flex flex-col gap-2 mt-8">
         <h1 className="text-2xl font-semibold line-clamp-1">{name}</h1>
         <p className="text-sm text-zinc-400 text-justify line-clamp-3">
