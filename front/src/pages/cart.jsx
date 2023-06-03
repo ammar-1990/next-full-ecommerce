@@ -51,7 +51,7 @@ if(loading) return 'Loading...'
   </thead>
   <tbody className="">
     {cart.length===0 &&<tr><td>No products in your cart</td></tr>}
-    {cart.map(el=><tr className="" key={el._id}>
+    {[...cart].reverse().map(el=><tr className="" key={el._id}>
       <td> <div className="flex flex-col"><img className="w-28 h-28 object-contain" src={el.images[0].url} /><p className="text-lg py-2 text-gray-800 w-fit">{el.name}</p></div></td>
       <td>
         <div className="flex items-center gap-1">

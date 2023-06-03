@@ -26,7 +26,7 @@ const dispatch = useDispatch()
             </button>
           </div>
         </div>
-        <img className="max-w-[300px] w-full" src={product.images[2].url} alt="" />
+        <img className="max-w-[300px] w-full" src={product.images[1].url} alt="" />
       </div>
     </div>
   );

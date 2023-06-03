@@ -80,13 +80,14 @@ if(loading) return 'loading..'
           </nav>
         
             <div
-              className={`flex flex-col absolute top-[100%] text-center ${menu ? "h-[300px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
+              className={`flex flex-col absolute top-[100%] text-center ${scroll ? "shadow-zinc-500" :"shadow-zinc-800"}  shadow-sm ${menu ? "h-[300px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
                 scroll ? " bg-zinc-800 text-white" : " bg-white text-zinc-800"
               }`}
             >
               {" "}
               {navLinks.map((el, i) => (
                 <Link
+                onClick={()=>setMenu(false)}
                   className={`p-4 ${
                     scroll ? "hover:bg-zinc-600" : "hover:bg-zinc-200"
                   } rounded-lg duration-300`}

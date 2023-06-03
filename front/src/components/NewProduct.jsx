@@ -15,7 +15,7 @@ dispatch(addToCart(product))
 
 
   return (
-    <div className="col-span-6 md:col-span-3 lg:col-span-2  mb-4 flex flex-col gap-1 bg-white rounded-md">
+    <div className="col-span-6 md:col-span-3 lg:col-span-2  mb-4 flex flex-col gap-1 bg-white rounded-md overflow-hidden">
       <Swiper
      className="w-full"
       slidesPerView={1}
