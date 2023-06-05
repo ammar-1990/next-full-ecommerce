@@ -10,6 +10,13 @@ const handler = async (req, res) => {
 
 
   if (req.method === "GET") {
+    if(req.query.category){
+    
+const category = req.query.category
+const products = await Product.find({},null,{cat:category});
+
+return res.status(200).json(products);
+    }
     if (req.query.id) {
       const id = req.query.id;
       if (!mongoose.isValidObjectId(id))

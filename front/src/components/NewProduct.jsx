@@ -62,7 +62,7 @@ const NewProduct = ({
         </p>
         <div className="flex justify-between py-4">
           <p className="font-semibold text-xs">${price.toFixed(2)}</p>
-          <p className="text-gray-500 uppercase text-xs">{cat}</p>
+          <Link href={`/categories?type=${cat.toLowerCase()}`} className="hover:underline"><p className="text-gray-500 uppercase text-xs">{cat}</p></Link>
         </div>
       </div>
       <div className="flex gap-2 items-center px-4">

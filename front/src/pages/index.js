@@ -14,7 +14,7 @@ export default function Home({featuredProduct,products}) {
       <title>E-commerce</title>
     </Head>
     <Featured product={featuredProduct} />
-    <NewProducts products={products} />
+    <NewProducts products={products} header={"New products"}/>
 
     
     
@@ -38,7 +38,7 @@ console.log(product,products)
 
 
 return {
-  props:{featuredProduct:product.data,products:products.data}
+  props:{featuredProduct:product.data,products:products.data.reverse().slice(0,6)}
 }
 
 }

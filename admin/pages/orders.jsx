@@ -22,7 +22,7 @@ const Orders = ({ user, orders }) => {
         <tbody className="text-zinc-700">
           {orders.map((el) => (
             <tr key={el._id} className="odd:bg-gray-200 bg-gray-100">
-              <td className="p-3  border  border-gray-300">{el.createdAt.replace('T',' ').substring(0,19)}</td>
+              <td className="p-3  border  border-gray-300">{new Date(el.createdAt).toLocaleString()}</td>
               <td className="p-3 border  border-gray-300">
                 <span className="capitalize">{el.name}</span> - {el.email} <br />{" "}
                 <span className="capitalize">
@@ -36,7 +36,7 @@ const Orders = ({ user, orders }) => {
                 <div className="flex gap-4 flex-col">
                   {el.cart.map((el, i) => (
                     <span key={i}>
-                      {el.name} X {el.amount}
+                      {el.name}   x{el.amount}
                     </span>
                   ))}
                 </div>
