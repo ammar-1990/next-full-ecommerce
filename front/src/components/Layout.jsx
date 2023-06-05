@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Bars3Icon } from "@heroicons/react/24/outline";
+import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useDispatch, useSelector } from "react-redux";
 import { getAll, getAmount, getCart } from "@/slices/cartSlice";
 
@@ -78,7 +79,8 @@ if(loading) return 'loading..'
               </Link>
             ))}
           </nav>
-        
+          
+     
             <div
               className={`flex flex-col absolute top-[100%] text-center ${scroll ? "shadow-zinc-500" :"shadow-zinc-800"}  shadow-sm ${menu ? "h-[300px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
                 scroll ? " bg-zinc-800 text-white" : " bg-white text-zinc-800"
@@ -99,6 +101,15 @@ if(loading) return 'loading..'
               ))}{" "}
             </div>
           
+<div className="md:hidden flex items-center gap-4">
+    <Link href={'/cart'}>
+    <span className="flex items-center gap-1 "><ShoppingBagIcon className={`md:hidden h-6 ${
+            scroll ? "text-zinc-700" : "text-white"
+          } `} />
+          ({amount})
+          </span></Link>
+   
+
           <span
             onClick={() => setMenu((prev) => !prev)}
             className={`md:hidden w-8 h-8 flex items-center ${
@@ -109,6 +120,10 @@ if(loading) return 'loading..'
           >
             <Bars3Icon className="h-6" />
           </span>
+</div>
+
+
+        
         </div>
       </header>
 

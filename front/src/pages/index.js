@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export default function Home({featuredProduct,products}) {
   console.log(products)
   return (
-   <div className=' bg-zinc-100'>
+   <div className=' bg-zinc-200'>
     <Head>
       <title>E-commerce</title>
     </Head>

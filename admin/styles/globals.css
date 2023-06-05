@@ -27,7 +27,7 @@ body{
 }
 
 .myScroll::-webkit-scrollbar {
-  @apply w-[5px];
+  @apply w-[5px] h-[5px];
 }
 
 .myScroll::-webkit-scrollbar-thumb {

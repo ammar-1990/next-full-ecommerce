@@ -65,6 +65,11 @@ state.loading=false
             }
 
 localStorage.setItem('cart',JSON.stringify(state.cart))
+        },
+
+        removeAll:(state)=>{
+state.cart=[]
+localStorage.removeItem('cart')
         }
     }
 })
@@ -72,7 +77,7 @@ localStorage.setItem('cart',JSON.stringify(state.cart))
 
 
 
-export const {addToCart,removeFromCart ,getAll} = cartSlice.actions
+export const {addToCart,removeFromCart ,getAll,removeAll} = cartSlice.actions
 
 export const getCart = (state)=>state.cart
 export const getTotal = (state)=>state.cart.cart.reduce((total,el)=>total+el.price*el.amount,0)

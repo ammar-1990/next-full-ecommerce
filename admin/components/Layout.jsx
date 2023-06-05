@@ -136,7 +136,7 @@ const Layout = ({ children }) => {
             {loading ? "Logging out..." : "Logout"}{" "}
           </button>
         </aside>
-        <main className="flex-1 lg:m-3  bg-white lg:rounded-lg p-4 lg:ml-0">
+        <main className="flex-1 lg:m-3  bg-white lg:rounded-lg p-4 lg:ml-0 overflow-x-scroll myScroll">
           {children}
         </main>
       </div>

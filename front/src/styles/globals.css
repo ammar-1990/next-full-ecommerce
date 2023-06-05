@@ -12,3 +12,8 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+
+.input {
+  @apply px-3 py-1 border rounded-sm outline-none
+}
+
