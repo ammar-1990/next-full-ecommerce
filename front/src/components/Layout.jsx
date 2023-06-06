@@ -23,11 +23,11 @@ const Layout = ({ children }) => {
     },
     {
       name: "account",
-      to: "account",
+      to: "/account",
     },
     {
       name: "cart",
-      to: "cart",
+      to: "/cart",
     },
   ];
 

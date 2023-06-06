@@ -1,11 +1,16 @@
 import axios from 'axios'
 import React from 'react'
+import Head from 'next/head'
 
 const categories = ({products}) => {
   return (
     <div>
+<Head>
+    <title>
+        Categories
+    </title>
+</Head>
 
-        
     </div>
   )
 }

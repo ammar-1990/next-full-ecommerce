@@ -38,6 +38,7 @@ const categories = ({ user, cats }) => {
         setCategories(duplicate);
         setEdit(null);
       } catch (error) {
+        setError(error.response.data)
         console.log(error);
       } finally {
         setLoading(false);
@@ -93,6 +94,7 @@ const categories = ({ user, cats }) => {
       setCategories((prev) => prev.filter((el) => el._id !== res.data._id));
       setToDelete(false);
     } catch (error) {
+      setError(error.response.data)
       console.log(error);
     } finally {
       setDeleteLoading(false);
@@ -192,12 +194,13 @@ const categories = ({ user, cats }) => {
                 No
               </button>
             </div>
+            {error&&<p className="py-3 text-xs test-red-500">{error}</p>}
           </div>
         )}
       </form>
 
       {error && (
-        <p className="text-red-500 py-4 text-xs">{error.response.data}</p>
+        <p className="text-red-500 py-4 text-xs">{error}</p>
       )}
 
       <div className="mt-2 p-1 sm:p-4 pt-0 max-h-[500px] overflow-y-scroll myScroll  ">

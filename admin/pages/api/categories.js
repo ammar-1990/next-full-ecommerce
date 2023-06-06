@@ -46,6 +46,7 @@ try {
 if(req.method === "PUT"){
 
     verifyToken(req,res)
+    if(req.user.email !=='ammar1@ammar.com') return errorHandler(createError(403,'not authorized'),req,res)
 
     const {name,parentCategory,id} = req.body
 
@@ -62,7 +63,9 @@ try {
 
 
 if(req.method==="DELETE"){
+
     verifyToken(req,res)
+    if(req.user.email !=='ammar1@ammar.com') return errorHandler(createError(403,'not authorized'),req,res)
    
   const id = req.query.id
 

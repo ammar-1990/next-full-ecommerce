@@ -1,10 +1,16 @@
 import axios from "axios";
 import jwt from "jsonwebtoken";
+import Head from "next/head";
 
 const Orders = ({ user, orders }) => {
   console.log(orders);
   return (
     <div className="w-full ">
+      <Head>
+        <title>
+          Orders
+        </title>
+      </Head>
       <h1 className="text-3xl font-bold">Orders</h1>
       <div className="h-[550px] overflow-y-scroll myScroll shadow-sm shadow-zinc-400  rounded-sm mt-12 ">
       <table className="w-full  text-white border border-zinc-800 min-w-[750px]">

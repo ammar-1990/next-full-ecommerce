@@ -10,6 +10,7 @@ const handler = async (req, res) => {
 
 
   if (req.method === "GET") {
+   
     if(req.query.category){
     
 const category = req.query.category
@@ -33,6 +34,7 @@ return res.status(200).json(products);
  
   if(req.method === "PUT"){
     verifyToken(req, res);
+    if(req.user.email !== 'ammar1@ammar.com') return errorHandler(createError(403,'not authorized'),req,res)
     const id = req.query.id;
     const { name, desc, price, cat, features ,images} = req.body;
     if (!name || !desc || !price || !cat ||images.length===0)
@@ -52,6 +54,7 @@ return res.status(200).json(products);
 
 if(req.method==="POST")
   {
+    console.log(req.user)
     verifyToken(req, res);
 console.log('post')
     const { name, desc, price, cat, features,images } = req.body;
@@ -68,6 +71,7 @@ console.log('post')
 
   if(req.method==="DELETE"){
     verifyToken(req, res);
+   if(req.user.email !=='ammar1@ammar.com') return errorHandler(createError(403,'not authorized'),req,res)
     console.log('DELETE')
     const id = req.query.id;
     console.log(id)
