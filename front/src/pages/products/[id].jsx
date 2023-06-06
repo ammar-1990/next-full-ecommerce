@@ -16,7 +16,7 @@ const SingleProduct = ({ product }) => {
   const handleToCart = () => {
     dispatch(addToCart(product));
   };
-
+const router = useRouter()
   return (
     <div className="bg-zinc-200 min-h-screen">
       
@@ -25,14 +25,14 @@ const SingleProduct = ({ product }) => {
       </Head>
       <div className=" max-w-[1100px] mx-auto p-5 ">
       <div className="text-right">
-          <Link href={"/"}>
-            <button className="bg-zinc-800 text-white py-1 px-4 border border-zinc-800 rounded-sm hover:bg-white hover:text-zinc-800 duration-300 my-3">
-              Main page
+         
+            <button onClick={()=>router.back()} className="bg-zinc-800 text-white py-1 px-4 border border-zinc-800 rounded-sm hover:bg-white hover:text-zinc-800 duration-300 my-3">
+              Back
             </button>
-          </Link>
+         
         </div>
       <div className="flex flex-col lg:flex-row gap-12">
-      <div className="flex-1 p-4 bg-white rounded-sm flex flex-col  ">
+      <div className="flex-1 p-4 bg-white rounded-xl flex flex-col  ">
           <img
             className="w-full aspect-square object-contain"
             src={product.images[index].url}

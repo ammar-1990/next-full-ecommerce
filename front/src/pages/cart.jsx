@@ -40,9 +40,7 @@ const cart = () => {
 
   const router = useRouter();
 
-  useEffect(() => {
-    console.log(router);
-  }, []);
+
 
   if (loading) return "Loading...";
 
@@ -55,7 +53,7 @@ const cart = () => {
       const res = await axios.post("http://localhost:3001/api/orders", {
         ...state,
       });
-      console.log(res.data);
+    
       setOrder(res.data);
       setState({
         name: "",
@@ -87,7 +85,7 @@ const cart = () => {
   };
 
   useEffect(() => {
-    console.log("cart", state.cart);
+  
     setState((prev) => ({ ...prev, cart: JSON.stringify(cart) }));
   }, [cart]);
 
@@ -163,7 +161,7 @@ const cart = () => {
           <div className="lg:col-span-3 col-span-5 p-10 px-6 rounded-lg bg-white">
             <h1 className="text-2xl font-bold">Cart</h1>
 
-            <table className="w-full mt-8 border-separate border-spacing-4">
+            <table className="w-full mt-8 ">
               <thead className="text-gray-500 capitalize font-semibold text-lg   ">
                 <tr>
                   <td>product</td>
@@ -178,7 +176,7 @@ const cart = () => {
                   </tr>
                 )}
                 {[...cart].reverse().map((el) => (
-                  <tr className="" key={el._id}>
+                  <tr className="odd:bg-gray-100" key={el._id}>
                     <td className="">
                       {" "}
                       <div className="flex flex-col">

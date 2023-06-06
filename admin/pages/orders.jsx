@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import Head from "next/head";
 
 const Orders = ({ user, orders }) => {
-  console.log(orders);
+
   return (
     <div className="w-full ">
       <Head>

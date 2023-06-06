@@ -45,7 +45,6 @@ const ProductControl = ({ initial_state, put, id, cats }) => {
   const addFeature = () => {
     let theValues;
 
-    console.log(state.features);
     if (value.includes(",")) {
       theValues = value.split(",");
 

@@ -3,11 +3,12 @@ import Featured from '@/components/Featured'
 import { Inter } from 'next/font/google'
 import Head from 'next/head'
 import NewProducts from '@/components/NewProducts'
+import Link from 'next/link'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home({featuredProduct,products}) {
-  console.log(products)
+
   return (
    <div className=' bg-zinc-200'>
     <Head>
@@ -15,6 +16,7 @@ export default function Home({featuredProduct,products}) {
     </Head>
     <Featured product={featuredProduct} />
     <NewProducts products={products} header={"New products"}/>
+    <div className='text-center py-8 max-w-[1100px] mx-auto px-6 '><Link href={'/products'}><button className='underline'>See all products</button></Link></div>
 
     
     
@@ -31,14 +33,14 @@ export async function getServerSideProps(){
 const product = await axios(`http://localhost:3000/api/products?id=647a2833af7e1975ccc72097`)
 const products = await axios(`http://localhost:3000/api/products`)
 
-console.log(product,products)
+
 
 
 
 
 
 return {
-  props:{featuredProduct:product.data,products:products.data.reverse().slice(0,6)}
+  props:{featuredProduct:product.data,products:products.data.reverse().slice(0,9)}
 }
 
 }

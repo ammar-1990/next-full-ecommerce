@@ -7,13 +7,13 @@ const Featured = ({product}) => {
 const dispatch = useDispatch()
 
   return (
-    <div className="bg-zinc-800 min-h-[500px]">
-      <div className="max-w-[1100px] mx-auto px-5 py-2 flex flex-col md:flex-row gap-16 pt-20 justify-between items-center">
+    <div className="bg-zinc-800 min-h-[480px]">
+      <div className="max-w-[1100px] mx-auto px-5 py-2 flex flex-col-reverse pb-20 lg:pb-0 md:flex-row gap-16 pt-20 justify-between items-center">
         <div className="flex flex-col gap-7 max-w-[600px]">
           <h1 className="text-white text-5xl">
            {product.name}
           </h1>
-          <p className="text-white text-justify">
+          <p className=" text-justify text-sm leading-6 tracking-wide text-zinc-200">
       {product.desc}
           </p>
           <div className="flex items-center gap-3 ">

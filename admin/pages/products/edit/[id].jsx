@@ -15,7 +15,7 @@ const ProductId = ({ theProduct,cats }) => {
     images:theProduct.images
   };
 
-  console.log(initial_state);
+
   const router = useRouter();
   const { id } = router.query;
 

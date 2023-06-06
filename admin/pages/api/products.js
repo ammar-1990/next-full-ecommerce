@@ -14,7 +14,7 @@ const handler = async (req, res) => {
     if(req.query.category){
     
 const category = req.query.category
-const products = await Product.find({},null,{cat:category});
+const products = await Product.find({cat:category});
 
 return res.status(200).json(products);
     }

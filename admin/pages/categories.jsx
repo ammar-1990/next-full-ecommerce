@@ -31,7 +31,7 @@ const categories = ({ user, cats }) => {
           parentCategory: parentCat,
           id: edit._id,
         });
-        console.log(res.data);
+       
         let duplicate = categories;
         const index = duplicate.findIndex((el) => el._id === edit._id);
         duplicate[index] = res.data;
@@ -54,7 +54,7 @@ const categories = ({ user, cats }) => {
           name: category,
           parentCategory: parentCat,
         });
-        console.log(res.data);
+       
         setCategories((prev) => [...prev, res.data]);
       } catch (error) {
         console.log(error);
@@ -73,11 +73,11 @@ const categories = ({ user, cats }) => {
     setCategory(category.name);
     setParentCat(category.parentCategory);
     catRef.current.focus();
-    console.log(category);
+  
   };
 
   const cancelEdit = () => {
-    console.log("hi");
+
     setEdit(null);
     setCategory("");
     setParentCat("");
@@ -86,10 +86,10 @@ const categories = ({ user, cats }) => {
   const handleDelete = async () => {
     try {
       setDeleteLoading(true);
-      console.log(toDelete._id);
+    
       setError("");
       const res = await newAxios.delete(`/categories?id=${toDelete._id}`);
-      console.log(res.data);
+   
 
       setCategories((prev) => prev.filter((el) => el._id !== res.data._id));
       setToDelete(false);

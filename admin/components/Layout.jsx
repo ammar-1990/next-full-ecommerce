@@ -50,13 +50,7 @@ const Layout = ({ children }) => {
       active: router.asPath.includes("/orders") ? true : false,
       href: "/orders",
     },
-    {
-      name: "settings",
-      Icon: Cog6ToothIcon,
-      Solid: CogSolid,
-      active: router.asPath.includes("/settings") ? true : false,
-      href: "/settings",
-    },
+   
   ];
 
   const { data, loading, error, addPost } = usePostFetch();
@@ -64,7 +58,7 @@ const Layout = ({ children }) => {
   const handleLogout = async () => {
     await addPost("/auth/logout", {});
 
-    console.log(data);
+   
     router.replace("/login");
   };
 

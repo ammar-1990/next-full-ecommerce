@@ -21,10 +21,7 @@ const Layout = ({ children }) => {
       name: "categories",
       to: "/categories",
     },
-    {
-      name: "account",
-      to: "/account",
-    },
+   
     {
       name: "cart",
       to: "/cart",
@@ -82,7 +79,7 @@ if(loading) return 'loading..'
           
      
             <div
-              className={`flex flex-col absolute top-[100%] text-center ${scroll ? "shadow-zinc-500" :"shadow-zinc-800"}  shadow-sm ${menu ? "h-[300px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
+              className={`flex flex-col absolute top-[100%] text-center ${scroll ? "shadow-zinc-500" :"shadow-zinc-800"}  shadow-sm ${menu ? "h-[230px] p-2" : "h-0"} duration-300 overflow-hidden  right-0 w-full capitalize rounded-b-lg ${
                 scroll ? " bg-zinc-800 text-white" : " bg-white text-zinc-800"
               }`}
             >
