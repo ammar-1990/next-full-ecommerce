@@ -34,7 +34,7 @@ const NewProduct = ({
 
   const [index, setIndex] = useState(1);
   return (
-    <div className="w-[330px]  mb-4 flex flex-col gap-1 bg-white rounded-sm overflow-hidden pb-3">
+    <div className="w-[330px]  flex flex-col gap-1 bg-white rounded-sm overflow-hidden pb-3">
       <Swiper
         className="w-full relative"
         slidesPerView={1}

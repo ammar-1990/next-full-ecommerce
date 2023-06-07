@@ -15,7 +15,7 @@ export default function Home({featuredProduct,products}) {
       <title>E-commerce</title>
     </Head>
     <Featured product={featuredProduct} />
-    <NewProducts products={products} header={"New products"}/>
+    <NewProducts products={products} header={"Latest products"}/>
     <div className='text-center py-8 max-w-[1100px] mx-auto px-6 '><Link href={'/products'}><button className='underline'>See all products</button></Link></div>
 
     
