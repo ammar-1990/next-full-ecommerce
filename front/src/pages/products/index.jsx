@@ -29,7 +29,7 @@ export default allproducts
 
 export async function getServerSideProps(){
 
-const res = await axios('http://localhost:3000/api/products')
+const res = await axios('https://next-full-ecommerce.vercel.app/api/products')
 return {
     props:{
         products:res.data

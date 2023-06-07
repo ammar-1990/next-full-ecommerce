@@ -56,7 +56,7 @@ export async function getServerSideProps(context) {
   const type = context.query.type;
   if (type) {
     const products = await axios(
-      `http://localhost:3000/api/products?category=${type}`
+      `https://next-full-ecommerce.vercel.app/api/products?category=${type}`
     );
 
     return {
@@ -65,7 +65,7 @@ export async function getServerSideProps(context) {
       },
     };
   } else {
-    const res = await axios("http://localhost:3000/api/categories");
+    const res = await axios("https://next-full-ecommerce.vercel.app/api/categories");
    
 
     return {

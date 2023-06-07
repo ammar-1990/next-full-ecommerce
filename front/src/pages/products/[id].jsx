@@ -105,7 +105,7 @@ const router = useRouter()
 export default SingleProduct;
 
 export async function getServerSideProps({ params: { id } }) {
-  const res = await axios(`http://localhost:3000/api/products?id=${id}`);
+  const res = await axios(`https://next-full-ecommerce.vercel.app/api/products?id=${id}`);
 
   return {
     props: { product: res.data },

@@ -30,8 +30,8 @@ export default function Home({featuredProduct,products}) {
 
 export async function getServerSideProps(){
 
-const product = await axios(`http://localhost:3000/api/products?id=647a2833af7e1975ccc72097`)
-const products = await axios(`http://localhost:3000/api/products`)
+const product = await axios(`https://next-full-ecommerce.vercel.app/api/products?id=647a2833af7e1975ccc72097`)
+const products = await axios(`https://next-full-ecommerce.vercel.app/api/products`)
 
 
 
