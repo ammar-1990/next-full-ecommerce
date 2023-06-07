@@ -50,7 +50,7 @@ const cart = () => {
     try {
       setError("");
       setFetchLoading(true);
-      const res = await axios.post("http://localhost:3001/api/orders", {
+      const res = await axios.post("https://next-full-ecommerce-fkss.vercel.app/api/orders", {
         ...state,
       });
     

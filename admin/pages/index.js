@@ -60,9 +60,9 @@ export async function getServerSideProps({ req, res }) {
   if (!user)
     return { redirect: { destination: "/register", permanent: false } };
 
-  const products = await axios("http://localhost:3000/api/products");
-  const categories = await axios("http://localhost:3000/api/categories");
-  const orders = await axios("http://localhost:3001/api/orders");
+  const products = await axios("https://next-full-ecommerce.vercel.app/api/products");
+  const categories = await axios("https://next-full-ecommerce.vercel.app/api/categories");
+  const orders = await axios("https://next-full-ecommerce-fkss.vercel.app/api/orders");
 
   return {
     props: {

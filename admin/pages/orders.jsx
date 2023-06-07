@@ -73,7 +73,7 @@ export async function getServerSideProps({ req, res }) {
   if (!user)
     return { redirect: { destination: "/register", permanent: false } };
 
-  const orders = await axios("http://localhost:3001/api/orders");
+  const orders = await axios("https://next-full-ecommerce-fkss.vercel.app/api/orders");
 
   return {
     props: { user, orders: orders.data },
